@@ -3,22 +3,32 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E1414)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
 
-* [Default.aspx](./CS/Default.aspx) (VB: [Default.aspx](./VB/Default.aspx))
-* [Default.aspx.cs](./CS/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/Default.aspx.vb))
-<!-- default file list end -->
-# How to bind the ASPxBinaryImage to a field which contains image data stored as OLE object
+# Grid View for ASP.NET Web Forms- How to use ASPxBinaryImage to bind a field that contains image data stored as OLE objects
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e1414/)**
 <!-- run online end -->
 
+If your data source contains images in a custom format (for instance, OLE Objects), the ASPxGridView control cannot bind data automatically. Follow the steps below to display the images in the grid:
 
-<p>This example is good when you have an Access database with a table, in which images are stored in columns of the Ole Object type. For instance, if you want to show data from this table in the ASPxGridView, Ole columns won't be recognized and no image data will be shown by default. To solve this problem you should customize the DataItem template for the image column and put the ASPxBinaryImage control there. Note that this control requires binary data (an array of bytes) to show images. Since we deal with OLE data, first we should  transform it to an array of bytes. I added a routine that does all the work and then bound the Value property of the ASPxBinaryImage to this method using a custom binding expression.</p><p><strong>See also:</strong><br />
-<a href="https://www.devexpress.com/Support/Center/p/E2933">Inserting of a new row in ASPxGridView with the image preview enabled</a><br />
-<a href="https://www.devexpress.com/Support/Center/p/E95">Image Upload in ASPxGridView</a></p>
+1. Create [DataItemTemplate](https://docs.devexpress.com/AspNet/DevExpress.Web.GridViewDataColumn.DataItemTemplate) for an image column.
+1. Place the [ASPxBinaryImage](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxBinaryImage) control in the template.
+1. Write a function to transform images from your format to an array of bytes.
+1. Use a custom binding expression to bind the [ASPxBinaryImage.Value](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxBinaryImage.Value) property to the transformed data.
 
-<br/>
+```aspx
+<dx:GridViewDataTextColumn Caption="Image" FieldName="Image" >
+    <DataItemTemplate>
+        <dx:ASPxBinaryImage ID="ASPxBinaryImage1" runat="server" 
+            Value='<%# ConvertOleObjectToByteArray(Eval("Image")) %>' />
+    </DataItemTemplate>
+</dx:GridViewDataTextColumn>
+```
 
+## Files to Review
 
+* [Default.aspx](./CS/Default.aspx) (VB: [Default.aspx](./VB/Default.aspx))
+* [Default.aspx.cs](./CS/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/Default.aspx.vb))
+
+## Online Demo
+* [Grid -- Binary Image Column Editing](https://demos.devexpress.com/ASPxGridViewDemos/GridEditing/BinaryImageColumnEditing.aspx)
