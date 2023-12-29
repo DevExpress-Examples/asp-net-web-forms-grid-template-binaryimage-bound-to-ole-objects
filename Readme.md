@@ -5,9 +5,6 @@
 <!-- default badges end -->
 
 # Grid View for ASP.NET Web Forms - How to use ASPxBinaryImage to bind a field that contains image data stored as OLE objects
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128538006/)**
-<!-- run online end -->
 
 If your data source contains images in a custom format (for instance, OLE Objects), the ASPxGridView control cannot bind data automatically. Follow the steps below to display the images in the grid:
 
